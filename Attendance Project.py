@@ -1,9 +1,13 @@
+#Real Time Attendance System
+
+#Importing Libraries
 import cv2
 import numpy as np
 import face_recognition
 import os
 from datetime import datetime
 
+#Path of images used
 path = 'Pics'
 images = []
 classNames = []
@@ -16,6 +20,7 @@ for cl in myList:
     classNames.append(os.path.splitext(cl)[0])
 print(classNames)
 
+#function to find encodings of an image
 def findEncodings(images):
     encodeList = []
     for img in images:
@@ -24,6 +29,7 @@ def findEncodings(images):
         encodeList.append(encode)
     return encodeList
 
+#To create attendance entries in csv file
 def markAttendance(name):
     with open('Attendance.csv', 'r+') as f:
         myDataList = f.readlines()
@@ -42,6 +48,7 @@ print('Encoding complete')
 
 cap = cv2.VideoCapture(0)
 
+#Face recognition and image manipulation
 while True:
     success, img = cap.read()
     imgS = cv2.resize(img,(0,0), None, 0.25, 0.25)
