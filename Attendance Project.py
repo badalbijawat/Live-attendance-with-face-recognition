@@ -44,12 +44,10 @@ cap = cv2.VideoCapture(0)
 
 while True:
     success, img = cap.read()
-    #imgS = cv2.resize(img,(0,0), None, 0.25, 0.25)
     imgS = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     facesCurFrame = face_recognition.face_locations(imgS)
     encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
-    print(len(facesCurFrame))
 
     for encodeFace, faceloc in zip(encodesCurFrame, facesCurFrame):
         matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
